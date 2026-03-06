@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wassergenossenschaften Sulzberg</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <div class="landing-container">
+    <header class="landing-header">
+      <h1>Wassergenossenschaften Sulzberg</h1>
+      <p>Gemeinde Sulzberg, Vorarlberg &mdash; Ihre Wasserversorgung vor Ort</p>
+    </header>
+
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+
+    <div class="landing-legend">
+      <div class="legend-item">
+        <span class="legend-dot active"></span>
+        Kirchdorf (aktiv)
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot inactive"></span>
+        Sonnenseite (demnächst)
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot inactive"></span>
+        Hinterberg (demnächst)
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot inactive"></span>
+        Thal (demnächst)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const map = L.map('map', {
+      center: [47.528, 9.925],
+      zoom: 13,
+      scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Approximate areas for each Genossenschaft
+    // These polygons are rough approximations and should be adjusted
+    const areas = [
+      {
+        name: 'Kirchdorf',
+        coords: [
+          [47.533, 9.910],
+          [47.536, 9.920],
+          [47.534, 9.932],
+          [47.528, 9.935],
+          [47.524, 9.928],
+          [47.524, 9.916],
+          [47.528, 9.910]
+        ],
+        color: '#3a8abd',
+        active: true,
+        url: 'kirchdorf/'
+      },
+      {
+        name: 'Sonnenseite',
+        coords: [
+          [47.536, 9.920],
+          [47.540, 9.925],
+          [47.540, 9.940],
+          [47.534, 9.942],
+          [47.534, 9.932]
+        ],
+        color: '#b0bec5',
+        active: false,
+        url: null
+      },
+      {
+        name: 'Hinterberg',
+        coords: [
+          [47.524, 9.928],
+          [47.528, 9.935],
+          [47.534, 9.942],
+          [47.530, 9.950],
+          [47.522, 9.945],
+          [47.520, 9.935]
+        ],
+        color: '#b0bec5',
+        active: false,
+        url: null
+      },
+      {
+        name: 'Thal',
+        coords: [
+          [47.524, 9.900],
+          [47.528, 9.910],
+          [47.524, 9.916],
+          [47.520, 9.920],
+          [47.516, 9.912],
+          [47.518, 9.900]
+        ],
+        color: '#b0bec5',
+        active: false,
+        url: null
+      }
+    ];
+
+    areas.forEach(function(area) {
+      const polygon = L.polygon(area.coords, {
+        color: area.active ? '#1a3a5c' : '#78909c',
+        fillColor: area.color,
+        fillOpacity: area.active ? 0.45 : 0.25,
+        weight: area.active ? 2.5 : 1.5
+      }).addTo(map);
+
+      if (area.active) {
+        polygon.bindTooltip(area.name, {
+          permanent: true,
+          direction: 'center',
+          className: 'area-label'
+        });
+        polygon.on('click', function() {
+          window.location.href = area.url;
+        });
+        polygon.getElement().style.cursor = 'pointer';
+      } else {
+        polygon.bindTooltip(area.name + ' (demnächst)', {
+          permanent: true,
+          direction: 'center',
+          className: 'area-label inactive-label'
+        });
+      }
+    });
+  </script>
+
+  <style>
+    .area-label {
+      background: rgba(26, 58, 92, 0.85);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .inactive-label {
+      background: rgba(120, 144, 156, 0.75);
+      font-weight: 400;
+    }
+  </style>
+</body>
+</html>
