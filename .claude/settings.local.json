@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.wg-mellau.at)"
+      "WebFetch(domain:www.wg-mellau.at)",
+      "Bash(mv:*)"
     ]
   }
 }

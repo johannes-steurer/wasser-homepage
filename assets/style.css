@@ -59,8 +59,8 @@ body {
 
 .map-container {
   width: 100%;
-  max-width: 800px;
-  height: 500px;
+  max-width: 1000px;
+  height: 600px;
   margin: 1rem auto 2rem;
   border-radius: 12px;
   overflow: hidden;
@@ -70,6 +70,20 @@ body {
 .map-container #map {
   width: 100%;
   height: 100%;
+}
+
+.schema-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.schema-container svg path:hover {
+  fill-opacity: 0.5;
 }
 
 .landing-legend {
@@ -287,13 +301,48 @@ nav a:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Dokumente */
+.doc-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.doc-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--color-white);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.doc-link:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.doc-icon {
+  font-size: 1.5rem;
+}
+
 /* Kontakt */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
 .contact-card {
   background: var(--color-white);
   border-radius: 10px;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  max-width: 400px;
+  text-align: center;
 }
 
 .contact-card h3 {
@@ -304,7 +353,6 @@ nav a:hover {
 .contact-card .role {
   color: var(--color-text-light);
   font-size: 0.9rem;
-  margin-bottom: 1rem;
 }
 
 .contact-card p {
@@ -325,13 +373,26 @@ footer {
   background: var(--color-primary);
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.footer-content p {
+  margin-bottom: 0.2rem;
+}
+
+footer strong {
+  color: rgba(255, 255, 255, 0.95);
 }
 
 footer a {
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* Responsive */
